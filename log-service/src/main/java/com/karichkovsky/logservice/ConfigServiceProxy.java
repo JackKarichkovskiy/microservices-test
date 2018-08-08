@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 //@FeignClient(name = "currency-exchange-service", url = "localhost:8000")
 //@FeignClient(name = "currency-exchange-service")
-@FeignClient(name = "config-service")
+@FeignClient(name = "gateway")
 @RibbonClient(name = "config-service")
 public interface ConfigServiceProxy {
 
-    @GetMapping("/appName")
-//    @GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
+    @GetMapping("/config-service/appName")
     String getAppName();
 }
