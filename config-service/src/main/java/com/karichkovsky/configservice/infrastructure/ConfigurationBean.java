@@ -1,15 +1,15 @@
-package com.karichkovsky.configservice;
+package com.karichkovsky.configservice.infrastructure;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author karic
  */
-@Component
+@Configuration
 @ConfigurationProperties("config-service")
-public class Configuration {
+public class ConfigurationBean {
 
     private String appName;
 
@@ -20,5 +20,4 @@ public class Configuration {
     public void setAppName(String appName) {
         this.appName = appName;
     }
-
 }

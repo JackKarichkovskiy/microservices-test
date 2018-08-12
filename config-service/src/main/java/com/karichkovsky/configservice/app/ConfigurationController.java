@@ -1,9 +1,9 @@
-package com.karichkovsky.configservice;
+package com.karichkovsky.configservice.app;
 
+import com.karichkovsky.configservice.infrastructure.ConfigurationBean;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,23 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @author karic
  */
 @RestController
+@AllArgsConstructor
+@Slf4j
 public class ConfigurationController {
 
     private static final String FALLBACK_APP_NAME = "Fallback Name";
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private final Configuration configuration;
-
-    @Autowired
-    public ConfigurationController(Configuration configuration) {
-        this.configuration = configuration;
-    }
+    private final ConfigurationBean configuration;
 
     @GetMapping("/appName")
     @HystrixCommand(fallbackMethod = "fallbackRetrieveAppName")
     public String retrieveConfiguration() {
-        logger.info("ConfigurationController.retrieveConfiguration");
+        log.info("ConfigurationController.retrieveConfiguration");
         return configuration.getAppName();
     }
 
